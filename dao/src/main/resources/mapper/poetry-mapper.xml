@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.git.hui.demo.mybatis.mapper.PoetryDao">
+
+    <sql id="poetryEntity">
+        id, title, author, content, `explain`, `type`, `tag`, `theme`, `is_deleted` as isDeleted,
+        UNIX_TIMESTAMP(`created_at`) as created,
+        UNIX_TIMESTAMP(`updated_at`) as updated
+    </sql>
+
+    <select id="queryPoetryById" parameterType="long" resultType="com.git.hui.demo.mybatis.entity.PoetryEntity">
+        select
+        <include refid="poetryEntity"/>
+        from
+        poetry
+        where
+        id=#{id}
+    </select>
+
+    <select id="queryPoetryByIds" resultType="com.git.hui.demo.mybatis.entity.PoetryEntity">
+        select
+        <include refid="poetryEntity"/>
+        from
+        poetry
+        where
+        id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        limit 500
+    </select>
+
+
+    <select id="queryPoetryByAuthor" resultType="com.git.hui.demo.mybatis.entity.PoetryEntity">
+        select
+        <include refid="poetryEntity"/>
+        from
+        poetry
+        where author=#{author}
+        <if test="offset != null">
+            and id > #{offset}
+        </if>
+        <choose>
+            <when test="begin != null">
+                <if test="size != null">
+                    limit #{begin}, #{size}
+                </if>
+                <if test="size == null">
+                    limit #{begin}, 20
+                </if>
+            </when>
+            <when test="begin == null">
+                <if test="size != null">
+                    limit #{size}
+                </if>
+                <if test="size == null">
+                    limit 20
+                </if>
+            </when>
+        </choose>
+    </select>
+
+
+    <select id="queryPoetryByContent" resultType="com.git.hui.demo.mybatis.entity.PoetryEntity">
+        select
+        <include refid="poetryEntity"/>
+        from
+        poetry
+        where content LIKE CONCAT(CONCAT('%', #{content}), '%')
+        <if test="offset != null">
+            and id > #{offset}
+        </if>
+        <choose>
+            <when test="begin != null">
+                <if test="size != null">
+                    limit #{begin}, #{size}
+                </if>
+                <if test="size == null">
+                    limit #{begin}, 20
+                </if>
+            </when>
+            <when test="begin == null">
+                <if test="size != null">
+                    limit #{size}
+                </if>
+                <if test="size == null">
+                    limit 20
+                </if>
+            </when>
+        </choose>
+    </select>
+
+</mapper>

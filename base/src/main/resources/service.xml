@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--<bean id="serviceA" class="com.git.hui.demo.base.bean.ServiceAFactoryBean">-->
+        <!--<constructor-arg value="test!"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="serviceB" class="com.git.hui.demo.base.bean.ServiceB">-->
+        <!--<property name="serviceA" ref="serviceA"/>-->
+    <!--</bean>-->
+
+    <bean id="serviceA" class="com.git.hui.demo.base.bean.ServiceA">
+        <constructor-arg value="test"/>
+    </bean>
+
+
+    <bean id="logAspect" class="com.git.hui.demo.base.bean.aspect.LogAspect"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<context:annotation-config />-->
+
+    <!--<context:component-scan base-package="com.git.hui.demo.base" />-->
+
+
+    <bean id="reqAspect" class="com.git.hui.demo.base.bean.aspect.ReqAspect"/>
+    <aop:config>
+        <aop:aspect id="req" ref="reqAspect">
+            <aop:pointcut id="method" expression="execution(public * com.git.hui.demo.base.bean.*.*(..))"/>
+            <aop:before method="doBefore" pointcut-ref="method"/>
+            <aop:after method="doAfter" pointcut-ref="method" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>

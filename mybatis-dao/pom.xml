@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.git.hui.demo</groupId>
-    <artifactId>dao</artifactId>
+    <artifactId>mybatis-dao</artifactId>
 
 
     <dependencies>

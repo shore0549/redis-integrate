@@ -48,7 +48,7 @@ public class FanoutConsumerConfig {
         return new BasicConsumer("fanout");
     }
 
-    @Bean(name = "directMessageListenerContainer")
+    @Bean(name = "FanoutMessageListenerContainer")
     public MessageListenerContainer messageListenerContainer() {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);

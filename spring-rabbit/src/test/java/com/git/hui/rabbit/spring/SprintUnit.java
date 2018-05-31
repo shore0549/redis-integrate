@@ -4,6 +4,7 @@ import com.git.hui.rabbit.spring.producer.AmqpProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,10 +18,13 @@ public class SprintUnit {
     @Autowired
     private AmqpProducer amqpProducer;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @Test
     public void testDirectConsumer() throws InterruptedException {
         String[] routingKey = new String[]{"hello.world", "world", "test1"};
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             amqpProducer
                     .publishMsg("direct.exchange", routingKey[i % 3], ">>> hello " + routingKey[i % 3] + ">>> " + i);
         }
@@ -53,4 +57,9 @@ public class SprintUnit {
         Thread.sleep(1000 * 60 * 10);
     }
 
+
+    @Test
+    public void justForTest() {
+        System.out.println("-----");
+    }
 }

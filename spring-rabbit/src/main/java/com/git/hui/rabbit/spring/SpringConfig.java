@@ -16,8 +16,11 @@ import org.springframework.core.env.Environment;
 @ComponentScan("com.git.hui.rabbit.spring")
 public class SpringConfig {
 
+    private Environment environment;
+
     @Autowired
     public void setEnvironment(Environment environment) {
+        this.environment = environment;
         System.out.println("then env: " + environment);
     }
 

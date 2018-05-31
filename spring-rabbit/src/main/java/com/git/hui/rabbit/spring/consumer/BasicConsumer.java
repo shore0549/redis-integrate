@@ -21,7 +21,7 @@ public class BasicConsumer implements ChannelAwareMessageListener {
         try {
             byte[] bytes = message.getBody();
             String data = new String(bytes, "utf-8");
-            System.out.println(name + " data" + data);
+            System.out.println(name + " data: " + data + " tagId: " + message.getMessageProperties().getDeliveryTag());
         } catch (Exception e) {
             log.error("local cache rabbit mq localQueue error! e: {}", e);
         }

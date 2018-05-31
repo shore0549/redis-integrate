@@ -3,6 +3,7 @@ package com.git.hui.demo.base.bean.test;
 import com.git.hui.demo.base.bean.BeansConfiguration;
 import com.git.hui.demo.base.bean.ServiceA;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -14,7 +15,7 @@ public class BeanConfigTest {
     // java bean 配置方式
     @Test
     public void testServiceA() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeansConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(BeansConfiguration.class);
         ServiceA serviceA = (ServiceA) context.getBean("serviceA");
         serviceA.print();
     }

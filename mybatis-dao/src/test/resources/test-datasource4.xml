@@ -64,11 +64,4 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-
-    AbstractBeanFactory
-
-
-
-
-
 </beans>

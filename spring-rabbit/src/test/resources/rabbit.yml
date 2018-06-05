@@ -1,0 +1,13 @@
+connectionFactory: defaultConnectionFactory
+rabbitAdmin: rabbitAdmin
+autoAck: false
+autoDelete: false
+durable: true
+exchange: topic.exchange
+conf:
+  queue1:
+    queue: dyn.queue0
+    routingKey: dyn.queue0
+  queue2:
+    queue: dyn.queue1
+    routingKey: dyn.queue1}

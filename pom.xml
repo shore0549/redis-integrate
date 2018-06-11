@@ -13,6 +13,7 @@
         <module>base</module>
         <module>base-rabbit</module>
         <module>spring-rabbit</module>
+        <module>spring-redis</module>
     </modules>
 
     <build>

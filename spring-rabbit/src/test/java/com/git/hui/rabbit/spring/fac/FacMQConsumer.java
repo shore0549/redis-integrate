@@ -17,6 +17,6 @@ public class FacMQConsumer extends AbsMQConsumer {
     public boolean process(Message message, Channel channel) {
         String data = new String(message.getBody());
         System.out.println(name + " fac mq consumer: " + data + " " + Thread.currentThread().getName());
-        return true;
+        return false;
     }
 }

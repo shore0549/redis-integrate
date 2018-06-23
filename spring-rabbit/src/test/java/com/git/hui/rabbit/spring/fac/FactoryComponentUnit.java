@@ -20,7 +20,7 @@ public class FactoryComponentUnit {
     @Test
     public void testDirectConsumer() throws InterruptedException {
         String[] routingKey = new String[]{"hello.world", "fac-routing", "test1"};
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             amqpProducer.publishMsg("fac.direct.exchange", routingKey[i % 3],
                     ">>> hello " + routingKey[i % 3] + ">>> " + i);
         }

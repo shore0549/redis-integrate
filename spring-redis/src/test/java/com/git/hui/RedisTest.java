@@ -1,6 +1,9 @@
 package com.git.hui;
 
 import com.git.hui.redis.RedisConfig;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +44,8 @@ public class RedisTest {
             return null;
         });
 
-        Map<byte[], byte[]> map = redisTemplate.execute((RedisCallback<Map<byte[], byte[]>>) con -> con.hGetAll(hkey.getBytes()));
+        Map<byte[], byte[]> map =
+                redisTemplate.execute((RedisCallback<Map<byte[], byte[]>>) con -> con.hGetAll(hkey.getBytes()));
         for (Map.Entry<byte[], byte[]> entry : map.entrySet()) {
             System.out.println("key: " + new String(entry.getKey()) + " | value: " + new String(entry.getValue()));
         }
@@ -59,5 +63,47 @@ public class RedisTest {
 
 
         System.out.println("ans: " + ans);
+    }
+
+    @Test
+    public void testRedisList() {
+        redisTemplate.opsForList().leftPushAll("list", "123", "234", "adsf");
+
+        String first = redisTemplate.opsForList().leftPop("list");
+        System.out.println(first);
+    }
+
+
+    @Test
+    public void testGuava() {
+        LoadingCache<String, String> cache = CacheBuilder.newBuilder().build(new CacheLoader<String, String>() {
+            @Override
+            public String load(String key) throws Exception {
+                if ("hello".equals(key)) {
+                    return "word";
+                }
+                return null;
+            }
+        });
+
+        String word = cache.getUnchecked("hello");
+        System.out.println(word);
+
+        try {
+            System.out.println(cache.getUnchecked("word"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public class NoVlaInGauvaException extends Exception {
+        public NoVlaInGauvaException(String msg) {
+            super(msg);
+        }
+
+        @Override
+        public synchronized Throwable fillInStackTrace() {
+            return this;
+        }
     }
 }

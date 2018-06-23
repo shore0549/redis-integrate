@@ -10,4 +10,4 @@ conf:
     routingKey: dyn.queue0
   queue2:
     queue: dyn.queue1
-    routingKey: dyn.queue1}
+    routingKey: dyn.queue1

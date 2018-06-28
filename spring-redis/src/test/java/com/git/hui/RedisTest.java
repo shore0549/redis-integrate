@@ -95,15 +95,4 @@ public class RedisTest {
             e.printStackTrace();
         }
     }
-
-    public class NoVlaInGauvaException extends Exception {
-        public NoVlaInGauvaException(String msg) {
-            super(msg);
-        }
-
-        @Override
-        public synchronized Throwable fillInStackTrace() {
-            return this;
-        }
-    }
 }

@@ -48,7 +48,9 @@ public class SimpleProducer {
 
         //发送消息
         RabbitTemplate template = new RabbitTemplate(factory);
-        template.convertAndSend("topic.exchange", "foo.bar", "Hello, world!");
+        for (int i = 0; i < 10; i++) {
+            template.convertAndSend("topic.exchange", "foo.bar", "Hello, world!");
+        }
         Thread.sleep(1000);
 
         // 关闭

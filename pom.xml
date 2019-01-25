@@ -15,6 +15,7 @@
         <module>spring-rabbit</module>
         <module>spring-redis</module>
         <module>task-engine</module>
+        <module>spring-dynamic-rabbit</module>
     </modules>
 
     <build>

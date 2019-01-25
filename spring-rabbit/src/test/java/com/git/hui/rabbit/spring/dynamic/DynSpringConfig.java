@@ -1,6 +1,6 @@
 package com.git.hui.rabbit.spring.dynamic;
 
-import com.git.hui.rabbit.spring.component.DynamicConsumer;
+import com.git.hui.rabbit.spring.component.consumer.DynamicConsumer;
 import com.git.hui.rabbit.spring.component.MQContainerFactory;
 import com.git.hui.rabbit.spring.producer.AmqpProducer;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;

@@ -8,11 +8,11 @@ import com.git.hui.task.api.ITask
 class DemoScript implements ITask {
     @Override
     void run() {
-        println "now >>> : >>" + System.currentTimeMillis()
+        println "now > : >>" + System.currentTimeMillis()
     }
 
     @Override
     void interrupt() {
-        println "over"
+        println "原来的结束 over"
     }
 }
